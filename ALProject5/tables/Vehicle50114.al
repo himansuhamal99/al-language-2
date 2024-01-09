@@ -22,7 +22,16 @@ table 50114 Vehicle_Table
             OptionMembers = "",Car,Bike,Truck;
             FieldClass = FlowField;
             CalcFormula = lookup(Manufacturer_Table."Vehicle Type" where("Manufacturer Id" = field(Manager_ID)));
+            trigger  OnValidate()
+
+             var
+                manu: Record "Manufacturer_Table";
+            begin
+                if manu.Get("Vehicle-Id") then
+                    "Vehicle Type" := manu."Vehicle Type";
+            end;
         }
+        
         field(4; "Engine Type"; Option)
         {
             OptionMembers = "",petrol,diesel,electric;
@@ -39,7 +48,7 @@ table 50114 Vehicle_Table
         }
     }
 
-    keys
+    keys 
     {
         key(Key1; "Vehicle-Id")
         {
@@ -57,7 +66,7 @@ table 50114 Vehicle_Table
 
     trigger OnInsert()
     begin
-
+          Message('data inserted');
     end;
 
     trigger OnModify()
