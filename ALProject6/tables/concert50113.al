@@ -4,7 +4,7 @@ table 50143 ConcertManagement
 
     fields
     {
-        field(1; "Concert Id"; Code[20])
+        field(1; "Concert Id"; Code[2048])
         {
             DataClassification = ToBeClassified;
 
@@ -16,9 +16,11 @@ table 50143 ConcertManagement
             trigger OnValidate()
             var
                 conc: Record VenueTable;
+                name: Record "country/region";
             begin
                 if conc.Get(Venue) then
-                    rec.Country := conc.Country
+                    if name.Get(conc.Country) then
+                        rec.Country := name.Name;
             end;
         }
         field(3; Country; text[100])
@@ -34,8 +36,8 @@ table 50143 ConcertManagement
             var
                 art: Record "Artist";
             begin
-                if art.Get(Manager_Name1) then
-                    rec.Manager_Name1 := art."Manager Name";
+                if art.Get(Artist) then
+                    rec."Manager_Name1" := art."Manager Name";
             end;
 
         }
@@ -91,3 +93,184 @@ table 50143 ConcertManagement
     end;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
